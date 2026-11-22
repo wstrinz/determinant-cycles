@@ -21,6 +21,13 @@ classification:
   msc2020: ["15A15", "15A18", "20C15"]
 
 sources:
+  - title: "Determinant recognition for overlapping weighted cycles"
+    authors: ["Will Strinz"]
+    location: "Challenge.lean and README.md"
+    type: original-proof
+    relationship: other
+    note: "First public presentation of the combined weighted-cycle comparison and its formal proof; no novelty claim for the underlying classical polynomial facts."
+    author_endorsement: "participated"
   - title: "Alpöge's Lean archive accompanying The Line Holds"
     authors: ["Levent Alpöge"]
     id: "https://github.com/leanprover-community/riemann-hypothesis/tree/40e56bab026552e089d7afcfeff08d2defb9c005"
