@@ -1,0 +1,22 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "DivisionFrontier.matrix_charpoly_unique_iff",
+    "DivisionFrontier.two_cycle_charpoly_iff",
+    "DivisionFrontier.matrix23_minpoly_degree",
+    "DivisionFrontier.matrix23_charpoly_eq_of_annihilator",
+    "DivisionFrontier.matrix23_minpoly_degree_eq_four",
+    "DivisionFrontier.cycle26_weighted_determinant_does_not_pin_trace"
+  ],
+  "definition_names": [
+    "DivisionFrontier.matrix23",
+    "DivisionFrontier.cycle26"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

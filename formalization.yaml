@@ -1,0 +1,57 @@
+version: "v0.4"
+project:
+  name: "Determinant recognition for overlapping weighted cycles"
+  description: >-
+    For an invertible matrix of dimension n over a field, the determinant and
+    the requirement of being a monic degree-n annihilator determine the
+    characteristic polynomial exactly when the minimal polynomial has degree
+    at least n−1. For two same-center cyclic block polynomials, the analogous
+    condition is that the block lengths are coprime. An invertible weighted
+    two-cycle plus three-cycle always meets the threshold, even when the
+    block spectra overlap. A two-cycle plus six-cycle with matched normalized products yields an explicit
+    degree-eight annihilator with the true determinant-derived constant term
+    but with a different trace coefficient. The proofs concern the algebraic
+    identification step, not an arithmetic application or the Riemann hypothesis.
+  authors: ["Will Strinz"]
+  license: "MIT"
+  responsible_maintainers: ["Will Strinz"]
+
+classification:
+  arxiv: ["math.RT", "math.RA"]
+  msc2020: ["15A15", "15A18", "20C15"]
+
+sources:
+  - title: "Alpöge's Lean archive accompanying The Line Holds"
+    authors: ["Levent Alpöge"]
+    id: "https://github.com/leanprover-community/riemann-hypothesis/tree/40e56bab026552e089d7afcfeff08d2defb9c005"
+    location: "DivWCoreLac; PDivOne.lean, Hecke characteristic-polynomial recognition"
+    type: formalization
+    relationship: background
+    note: "Motivation only. The submitted Lean uses Mathlib and includes no code from this archive."
+    author_endorsement: "not-contacted"
+  - title: "The N-Eigenvalue Problem and Two Applications"
+    authors: ["Michael Larsen", "Eric C. Rowell", "Zhenghan Wang"]
+    id: "arXiv:math/0506025"
+    location: "Lemma 2.1"
+    type: paper
+    relationship: background
+    note: "Related root-of-unity spectral packets for cyclic block actions."
+    author_endorsement: "not-contacted"
+
+status:
+  scope: "Sharp matrix and two-packet polynomial recognition, with explicit 2+3 and 2+6 matrix conclusions. No general reductive-group theorem, arithmetic consequence, or novelty claim for the classical ingredients."
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: agent
+      models: []
+      framework: "OpenAI ChatGPT Work"
+      tool_setup: "Explored the boundary, designed explicit matrices, developed the formal proofs, and checked the staged comparison targets."
+  notes: "Will Strinz directed the research and controls release. No independent human expert review is claimed."
+
+review:
+  status: "unreviewed"
+  notes: "Verification and editorial review are distinct. No prior independent expert endorsement is claimed."
