@@ -11,6 +11,8 @@ open Polynomial
 
 namespace DivisionFrontier
 
+universe u
+
 /-- The permutation with a 2-cycle and a 6-cycle on disjoint coordinates. -/
 def cycle26 : Equiv.Perm (Fin 8) :=
   { toFun := ![1, 0, 3, 4, 5, 6, 7, 2]
@@ -25,7 +27,7 @@ set_option maxHeartbeats 1000000 in
 /-- On a weighted 2+6 generator coset with equal normalized cycle products, the
 monic degree-eight annihilator with prescribed determinant need not have the
 correct trace coefficient. -/
-theorem cycle26_weighted_determinant_does_not_pin_trace {K : Type*} [Field K]
+theorem cycle26_weighted_determinant_does_not_pin_trace {K : Type u} [instField : Field K]
     (w : Fin 8 → K) (u : K) (hu : u ≠ 0) (hsmall : w 0 * w 1 = u)
     (hlarge : w 2 * w 3 * w 4 * w 5 * w 6 * w 7 = u ^ 3) :
     let A : Matrix (Fin 8) (Fin 8) K := Matrix.diagonal w * cycle26.permMatrix K

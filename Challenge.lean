@@ -21,9 +21,11 @@ open Polynomial
 
 namespace DivisionFrontier
 
-variable {K : Type*} [Field K]
+universe u
 
-def matrix23 {K : Type*} [Zero K] (a b c d e : K) : Matrix (Fin 5) (Fin 5) K :=
+variable {K : Type u} [instField : Field K]
+
+def matrix23 {K : Type u} [instZero : Zero K] (a b c d e : K) : Matrix (Fin 5) (Fin 5) K :=
   !![0, a, 0, 0, 0;
      b, 0, 0, 0, 0;
      0, 0, 0, c, 0;
@@ -37,7 +39,7 @@ def cycle26 : Equiv.Perm (Fin 8) :=
     right_inv := by intro i; fin_cases i <;> decide }
 
 /-- The determinant recognises the characteristic polynomial exactly when the minimal polynomial loses at most one degree. -/
-theorem matrix_charpoly_unique_iff {K : Type*} [Field K] {n : ℕ}
+theorem matrix_charpoly_unique_iff {K : Type u} [instField : Field K] {n : ℕ}
     (A : (Matrix (Fin n) (Fin n) K)ˣ) :
     (∀ q : K[X], q.Monic → q.natDegree = n → aeval A.val q = 0 →
       q.coeff 0 = A.val.charpoly.coeff 0 → q = A.val.charpoly) ↔
@@ -54,13 +56,13 @@ theorem two_cycle_charpoly_iff {a b : ℕ} (ha : 0 < a) (hb : 0 < b)
   sorry
 
 /-- The weighted 2+3 matrix has minimal-polynomial degree at least four. -/
-theorem matrix23_minpoly_degree {K : Type*} [Field K] (a b c d e : K)
+theorem matrix23_minpoly_degree {K : Type u} [instField : Field K] (a b c d e : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0) :
     4 ≤ (minpoly K (matrix23 a b c d e)).natDegree := by
   sorry
 
 /-- A monic quintic annihilator with the signed determinant constant agrees with the 2+3 characteristic polynomial. -/
-theorem matrix23_charpoly_eq_of_annihilator {K : Type*} [Field K] (a b c d e : K)
+theorem matrix23_charpoly_eq_of_annihilator {K : Type u} [instField : Field K] (a b c d e : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0) (he : e ≠ 0)
     (p : K[X]) (hp : p.Monic) (hpn : p.natDegree = 5)
     (haev : aeval (matrix23 a b c d e) p = 0)
@@ -69,14 +71,14 @@ theorem matrix23_charpoly_eq_of_annihilator {K : Type*} [Field K] (a b c d e : K
   sorry
 
 /-- Under a shared spectral center the 2+3 minimal-polynomial degree is exactly four. -/
-theorem matrix23_minpoly_degree_eq_four {K : Type*} [Field K] (a b c d e z : K)
+theorem matrix23_minpoly_degree_eq_four {K : Type u} [instField : Field K] (a b c d e z : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0)
     (hab : a*b = z^2) (hcde : c*d*e = z^3) :
     (minpoly K (matrix23 a b c d e)).natDegree = 4 := by
   sorry
 
 /-- The 2+6 matrix has a monic degree-eight annihilator with the right constant but the wrong trace coefficient. -/
-theorem cycle26_weighted_determinant_does_not_pin_trace {K : Type*} [Field K]
+theorem cycle26_weighted_determinant_does_not_pin_trace {K : Type u} [instField : Field K]
     (w : Fin 8 → K) (u : K) (hu : u ≠ 0) (hsmall : w 0 * w 1 = u)
     (hlarge : w 2 * w 3 * w 4 * w 5 * w 6 * w 7 = u ^ 3) :
     let A : Matrix (Fin 8) (Fin 8) K := Matrix.diagonal w * cycle26.permMatrix K

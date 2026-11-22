@@ -8,10 +8,12 @@ open Polynomial
 
 namespace DivisionFrontier
 
+universe u
+
 /-- Given a divisor with nonzero constant coefficient and one monic degree-`n`
 multiple, prescribing the constant coefficient pins that multiple exactly
 when the degree deficit is at most one. -/
-theorem monic_multiple_unique_iff {K : Type*} [Field K] {m p : K[X]} {n : ℕ}
+theorem monic_multiple_unique_iff {K : Type u} [instField : Field K] {m p : K[X]} {n : ℕ}
     (hm : m.coeff 0 ≠ 0) (hp : p.Monic) (hd : p.natDegree = n) (hmp : m ∣ p) :
     (∀ q : K[X], q.Monic → q.natDegree = n → m ∣ q → q.coeff 0 = p.coeff 0 → q = p) ↔
       n ≤ m.natDegree + 1 := by
@@ -62,7 +64,7 @@ theorem monic_multiple_unique_iff {K : Type*} [Field K] {m p : K[X]} {n : ℕ}
 /-- For an invertible `n`-by-`n` matrix, the determinant and the condition of
 being a monic degree-`n` annihilator determine the characteristic polynomial
 if and only if the minimal polynomial has degree at least `n - 1`. -/
-theorem matrix_charpoly_unique_iff {K : Type*} [Field K] {n : ℕ}
+theorem matrix_charpoly_unique_iff {K : Type u} [instField : Field K] {n : ℕ}
     (A : (Matrix (Fin n) (Fin n) K)ˣ) :
     (∀ q : K[X], q.Monic → q.natDegree = n → aeval A.val q = 0 →
       q.coeff 0 = A.val.charpoly.coeff 0 → q = A.val.charpoly) ↔

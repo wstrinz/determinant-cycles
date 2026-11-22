@@ -14,22 +14,24 @@ open Polynomial
 
 namespace DivisionFrontier
 
+universe u
+
 /-- A weighted permutation matrix with one 2-cycle and one 3-cycle. -/
-def matrix23 {K : Type*} [Zero K] (a b c d e : K) : Matrix (Fin 5) (Fin 5) K :=
+def matrix23 {K : Type u} [instZero : Zero K] (a b c d e : K) : Matrix (Fin 5) (Fin 5) K :=
   !![0, a, 0, 0, 0;
      b, 0, 0, 0, 0;
      0, 0, 0, c, 0;
      0, 0, 0, 0, d;
      0, 0, e, 0, 0]
 
-private def inv23 {K : Type*} [Field K] (a b c d e : K) : Matrix (Fin 5) (Fin 5) K :=
+private def inv23 {K : Type u} [instField : Field K] (a b c d e : K) : Matrix (Fin 5) (Fin 5) K :=
   !![0, b⁻¹, 0, 0, 0;
      a⁻¹, 0, 0, 0, 0;
      0, 0, 0, 0, e⁻¹;
      0, 0, c⁻¹, 0, 0;
      0, 0, 0, d⁻¹, 0]
 
-private def units23 {K : Type*} [Field K] (a b c d e : K)
+private def units23 {K : Type u} [instField : Field K] (a b c d e : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0) (he : e ≠ 0) :
     (Matrix (Fin 5) (Fin 5) K)ˣ where
   val := matrix23 a b c d e
@@ -45,7 +47,7 @@ private def units23 {K : Type*} [Field K] (a b c d e : K)
       simp [matrix23, inv23, Matrix.mul_apply, Fin.sum_univ_succ,
         ha, hb, hc, hd, he]
 
-private theorem powers23 {K : Type*} [Field K] (a b c d e : K) :
+private theorem powers23 {K : Type u} [instField : Field K] (a b c d e : K) :
     (matrix23 a b c d e)^2 =
       !![a*b, 0, 0, 0, 0;
          0, b*a, 0, 0, 0;
@@ -57,7 +59,7 @@ private theorem powers23 {K : Type*} [Field K] (a b c d e : K) :
   fin_cases i <;> fin_cases j <;>
     simp [matrix23, Matrix.mul_apply, Fin.sum_univ_succ]
 
-private theorem cubes23 {K : Type*} [Field K] (a b c d e : K) :
+private theorem cubes23 {K : Type u} [instField : Field K] (a b c d e : K) :
     (matrix23 a b c d e)^3 =
       !![0, a*b*a, 0, 0, 0;
          b*a*b, 0, 0, 0, 0;
@@ -71,7 +73,7 @@ private theorem cubes23 {K : Type*} [Field K] (a b c d e : K) :
     simp [matrix23, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- Any weighted 2+3 matrix has minimal-polynomial degree at least four. -/
-theorem matrix23_minpoly_degree {K : Type*} [Field K] (a b c d e : K)
+theorem matrix23_minpoly_degree {K : Type u} [instField : Field K] (a b c d e : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0) :
     4 ≤ (minpoly K (matrix23 a b c d e)).natDegree := by
   let M := matrix23 a b c d e
@@ -103,7 +105,7 @@ theorem matrix23_minpoly_degree {K : Type*} [Field K] (a b c d e : K)
 
 /-- In the weighted 2+3 cycle, even one common eigenvalue does not leave enough
 room for a second monic quintic annihilator with the correct constant term. -/
-theorem matrix23_charpoly_eq_of_annihilator {K : Type*} [Field K] (a b c d e : K)
+theorem matrix23_charpoly_eq_of_annihilator {K : Type u} [instField : Field K] (a b c d e : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0) (he : e ≠ 0)
     (p : K[X]) (hp : p.Monic) (hpn : p.natDegree = 5)
     (haev : aeval (matrix23 a b c d e) p = 0)
@@ -121,7 +123,7 @@ theorem matrix23_charpoly_eq_of_annihilator {K : Type*} [Field K] (a b c d e : K
   exact (matrix_charpoly_unique_iff U).2 hdeg p hp hpn haev hp0
 
 /-- At a common normalized center, the degree bound is attained. -/
-theorem matrix23_minpoly_degree_eq_four {K : Type*} [Field K] (a b c d e z : K)
+theorem matrix23_minpoly_degree_eq_four {K : Type u} [instField : Field K] (a b c d e z : K)
     (ha : a ≠ 0) (hb : b ≠ 0) (hc : c ≠ 0) (hd : d ≠ 0)
     (hab : a*b = z^2) (hcde : c*d*e = z^3) :
     (minpoly K (matrix23 a b c d e)).natDegree = 4 := by

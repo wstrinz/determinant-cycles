@@ -12,7 +12,9 @@ open Polynomial
 
 namespace DivisionFrontier
 
-variable {K : Type*} [Field K]
+universe u
+
+variable {K : Type u} [instField : Field K]
 
 private theorem cycle_split (z : K) (a b : ℕ) :
     (X ^ (a + b) - C (z ^ (a + b)) : K[X]) =
